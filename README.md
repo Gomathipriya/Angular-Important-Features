@@ -100,6 +100,51 @@ class DefaultPipe() {
 }
 </pre>
 
+### Life Cycle
+
+#### ngOnit
+
+* Called after the component is loaded and all the data properties are set
+* Called only once when the component is loaded into the DOM
+* Use to add something once the component is loaded.
+* Subscribe to data from API
+* Initialize third party library
+
+#### ngOnChange
+
+* Called before ngOnit
+* Called everytime when @Input data changes
+* Holds both current and previous value
+
+#### ngDoCheck
+
+* Called everytime when there is a change detection
+* Used to trigger change detection manually
+* Called immediately after ngOnchange and ngOnInit
+
+#### ngAfterContentInit (after content projection in view completed)
+
+* Called only once after ngDoCheck
+* Called whenever Angular projects content into view
+
+#### ngAfterContentChecked (after content projection in view completed)
+
+* Called everytime after ngDoCheck
+
+#### ngAfterViewInit (once view is loaded)
+
+* Called once view and all the other child views are loaded
+
+#### ngAfterViewChecked (once view is loaded)
+
+* Called once after ngAfterViewInit
+* Called everytime after ngDoCheck
+* Avoid using this for performance reason
+
+#### ngDestory
+
+* Cleans up event (detach) handlers or subscriptions (unsubscribe) to prevent memory leak
+* Called just before the component is destroyed
 
 
 
