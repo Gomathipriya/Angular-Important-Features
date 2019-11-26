@@ -41,7 +41,38 @@ Platform and library for building client applications using HTML and Typescript
 
 #### Pipes
 
-*
+* Improve the user experience by transforming the value before displaying
+* Can be used when we need to transform data only in the template
+* eg. Currency, date, lowercase , uppecase, percent
+* <code> {{ dateVal | date:'dd/mm/yy' }} </code>
+
+<strong> <u> Async Pipes </u> </strong>
+
+* Uses promise and Observable directly in template wihtout storing the result
+
+
+<strong> <u> Custom Pipes </u> </strong>
+<pre>
+import { pipe } from '@angular/core';
+
+@pipe({
+   name : 'default'
+})
+
+class DefaultPipe() {
+  transform(value, fallback) {
+    let data = null;
+    if(value) {
+      data = value;
+    }
+    else {
+      data = fallback;
+    }
+    return data;
+  }
+}
+</pre>
+
 
 
 
