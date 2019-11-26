@@ -24,6 +24,15 @@ Platform and library for building client applications using HTML and Typescript
 * Has the data and login mapped to the template (HTML)
 * Class with decorator @component
 
+ | Presentational Component | Container Component |
+ | -------------------------|-------------------- |
+ | How things look | how things work|
+ | Have DOM mark up and styles | Dont have DOM markup expect for wrapping div no styles|
+ | Sateless | Stateful|
+ | Receives data via @Input | All business logic and no UI logic |
+ 
+
+
 #### Services
 
 * Provides specific functionalities
