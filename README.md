@@ -54,7 +54,29 @@ Platform and library for building client applications using HTML and Typescript
 * <strong>Automatic</strong>ally takes care of <strong>unsubscribing</strong> from the observalbes
 <code> <p> {{ observalbe | async }} >/p> </code > 
 * async keyword resolve observable to the current value
+* Default Without Async - subscribe and map data into a local variable manually -> unsubscribing manually (ngOnDestory) -> to avoid memory leak when the component is destroyed
+* <strong> TakeUntil </strong> operator - Supports multiple observable per subscription - Takes care of unsubscribing - Doesnt work with (onPush) change detection( due to performance optimization)
 
+<pre>
+
+<p *ngIf = "(observable$ | async) > 5" >
+  {{ observable$ | async }}
+</p>
+
+items$ : observable<number[]>;
+
+<p *ngFor="let item of items | async">
+  {{item}}
+</p>
+  
+</pre>
+
+* Whenever a new value is emitted, async pipe marks the component to be checked for changes. 
+* Invokes transform() on every change detection cycle.
+* Async pipe will be destoryed when its container is removed from the DOM or the parent component is destroyed.
+* Async pipe optimizes when its parent component is using change detection strategy as onPush
+
+Note: Not to create multiple async pipes for the same observable
 
 <strong> <u> Custom Pipes </u> </strong>
 <pre>
