@@ -52,9 +52,9 @@ Platform and library for building client applications using HTML and Typescript
 * Unwraps a value from an asynchronous primitive
 * Allows <strong>subscription</strong> to observables <strong>inside</strong> of the angular <strong>template</strong>
 * <strong>Automatic</strong>ally takes care of <strong>unsubscribing</strong> from the observalbes
-<pre>
+<
 <p> {{ observalbe | async }} </p> 
-</pre>
+>
 * async keyword resolve observable to the current value
 * Default Without Async - subscribe and map data into a local variable manually -> unsubscribing manually (ngOnDestory) -> to avoid memory leak when the component is destroyed
 * <strong> TakeUntil </strong> operator - Supports multiple observable per subscription - Takes care of unsubscribing - Doesnt work with (onPush) change detection( due to performance optimization)
