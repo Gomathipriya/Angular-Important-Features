@@ -34,21 +34,26 @@ Platform and library for building client applications using HTML and Typescript
 #### Templates
 
 * HTML that can modifiy data before it display
-* Event Binidng - () - response to the user input
-* Property Binding - [] {{}} - Interpolate values into HTML
+* <strong>Event Binidng</strong> - () - response to the user input
+* <strong>Property Binding</strong> - [] {{}} - Interpolate values into HTML
 * Before displaying view - Angular "evalutates Directive" and resolves "binding syntax" in template to modify the DOM
-* Angular supports two way data binding
+* Angular supports <strong>two way data binding</strong>
 
 #### Pipes
 
-* Improve the user experience by transforming the value before displaying
-* Can be used when we need to transform data only in the template
+* Improve the user experience by <strong>transforming the value</strong> before displaying
+* Can be used when we need to transform data only <strong>in the template</strong>
 * eg. Currency, date, lowercase , uppecase, percent
 * <code> {{ dateVal | date:'dd/mm/yy' }} </code>
 
 <strong> <u> Async Pipes </u> </strong>
 
 * Uses promise and Observable directly in template wihtout storing the result
+* Unwraps a value from an asynchronous primitive
+* Allows <strong>subscription</strong> to observables <strong>inside</strong> of the angular <strong>template</strong>
+* <strong>Automatic</strong>ally takes care of <strong>unsubscribing</strong> from the observalbes
+<code> <p> {{ observalbe | async }} >/p> </code > 
+* async keyword resolve observable to the current value
 
 
 <strong> <u> Custom Pipes </u> </strong>
