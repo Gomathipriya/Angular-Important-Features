@@ -12,11 +12,32 @@ Platform and library for building client applications using HTML and Typescript
 
 #### Modules
 
-* Compilation Context for the components
+* Compilation Context for the components (templates) - Consolidate Components, directives, pipes into cohesive blocks of funtions
 * Defines an angular application
 * Should have a root module to bootstrap the application
 * Can import functionalities from other modules and also allow their functionality to be exported
 * Lazy loading - Loading modules on demand, minimize the code loaded during start up
+* eg., Reactive form Directive and services \ Router Directive and services
+*  Uses @NgModule()
+* Helps to define public API 
+* Helps in dependency injection configuration
+* <strong> Root module </strong> - name (AppModule) - import BrowserModule - helps in bootstrap
+* Making modules more readalbe using spread operators
+```
+export const componentList = [];
+export const directiveList = [];
+export const pipeList = [];
+@NgModule({
+  declarations : [
+    ...componentList,
+    ...directiveList,
+    ...pipeList
+  ]
+})
+```
+* To make a module publicly available we need to export it
+* Injectables received in most of the cases are application wide singleton
+* Helps in lazy loading, server side rendering and to split large application into set of feature modules
 
 #### Components
 
@@ -39,6 +60,16 @@ Platform and library for building client applications using HTML and Typescript
 * Injected into components as Dependency
 * Makes the code module reusable and efficient
 * Class with decorator @Injectable
+* eg., fetching data from service, validating user input
+* Available for any component
+* <strong> Injector </strong> - application wide injector during bootstrap to create dependency, maintian container of dependency instances that is reusable if possible
+* <strong> Provider </strong> - object that tells injector to obtain or create dependancy
+``` @Injectable({
+  provideIn : 'root'
+})  Above is the single shared instance - inject into any class that request
+```
+* Registering in NgModule  - Available to all the components in that module
+* Registering in Component - providers : [] - New instance of service with each new instance of the component  
 
 #### Templates
 
