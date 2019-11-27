@@ -186,5 +186,19 @@ class DefaultPipe() {
 * Cleans up event (detach) handlers or subscriptions (unsubscribe) to prevent memory leak
 * Called just before the component is destroyed
 
+### JIT Vs AOT
 
+| Just In Time Compilation                  | Ahead of Time Compilation                            |
+| ----------------------------------------- | ---------------------------------------------------  |
+| 1. Development using TS                   | 1. Development using TS                              |
+| 2. Compilation with tsc                   | 2. Compilation with ngc                              |
+|    Build cmd (ng serve)                   |    Build cmd (ng build -- prod && ng serve --prod)   |
+| 3. Bundling                               | 3. Compilation of templates with angular - typescript| 
+| 4. Minification                           | 4. Compilation of typescript to javascript           | 
+| 5. Deployment                             | 5. Bundling                                          |
+| 6. On Browser - Download all JS           | 6. Minification                                      |
+| 7. Angular Bootstrap                      | 7. Deployment                                        |
+| 8. JIT compilation - generation of JS for each component |  8. On Browser - (download all assets)|
+| 9. Application render                     | 9. Angular bootstrap                                 |
+|                                           | 10. Application render                               |
 
