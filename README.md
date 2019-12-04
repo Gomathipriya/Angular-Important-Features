@@ -360,4 +360,23 @@ output: 1 4 9
                         |                          pipes()  => Observable                        |
                         |------------------------------------------------------------------------|
 ```
+
+* CatchError
+
+```
+import { ajax } from 'rxjs/ajax';
+import { map, CatchError } from 'rxjs/operators'
+const apiData = ajax('/api/data').pipe(
+ retry(3),
+ map(res => {
+  if(!res.response) throw new Error ("No Data");
+  return res.response;
+ }),
+ catchError(err => of ([])
+);
+apiData.subscribe({
+  next(x) { console.log(x)},
+  error(err) { console.log(err)}
+})
+```
  
