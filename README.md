@@ -226,7 +226,52 @@ class DefaultPipe() {
 
 * Producer determines when to send data to the consumer
 * Consumer unaware of when it will receive the data
-* e.g. Promise - 
+* e.g. Promise - delivers a resolved value to registered callbacks (Consumers) - incharge of when to push value to callbacks
+
+#### Observable
+
+* Push system JS
+* Producer of multiple values pushing them to observers (consumers)
+* Functions with zero arguments but generalize those to allow multiple values
+* To invoke an observable we need to subscribe to it
+* Subscribing to an observable is analogy to calling a function
+* Observables able to deliver values either synchronously or async
+
+```
+import { observalbe } from 'rxjs';
+const foo = new Observable( subscriber => {
+  console.log("Hello");
+  subscriber.next(42);
+  subscriber.next(100);
+  setTimeOut(() => {  //async call
+    subscriber.next(300);
+  },1000);  
+});
+console.log("before");
+foo.subscribe(x => {
+  console.log(x);
+});
+console.log("after");
+
+
+output
+======
+"before"
+"Hello"
+42
+100
+"after"
+300 //async
+```
+
+| System         |  Description   |
+| ------------   | -------------- |
+| Function       | Sync, return single value on invocation |
+| Generator      | sync, return 0 to potentially infiniate value on iteration  |
+| Promise        | May or maynot return single value |
+| Observable     | sync or async return potentially infinite values   |
+
+
 
 
 
