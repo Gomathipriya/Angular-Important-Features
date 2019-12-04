@@ -214,11 +214,13 @@ class DefaultPipe() {
 * async data streams (sequence of ordered events) e.g. button click
 * declarative programing paradigm - react to changes via streams
 * handling events and data flows
-
+```
 |-------------- | ------------- |
 | Node JS       | Streams       |
 | Unix          | Pipes         |
 | Angular       | async pipes   |
+|-------------- | ------------- |
+```
 
 #### PUSH Vs PULL Protocol
 
@@ -286,6 +288,12 @@ output
 
 #### RxJS - Reactive Extension for JavaScript
 
+* Anatomy of Observable
+  1. Creating an observable
+  2. Subscribing to an observable
+  3. Executing an observable
+  4. Disposing observable
+
 * creating observable from promise
 
 ```
@@ -339,6 +347,13 @@ apiData.subscribe( res => {
 
 * functions that enable manipulation of collection
 * takes config options - return fn that take source observable - on exec - operator observer (source observable emitted value) - transform them - return new observable of transformed value
+* allows complex async code to be easily composed in a declarative manner.
+
+|   Pipeable               | Creation            |
+| -------------------------| --------------------|
+| Can be piped to observables | Stand alone functions |
+| filter, mergemap         | of                  |
+| dont change the existing, returns new obs|        |
 
 ```
 import { map } from 'rxjs/operators';
@@ -370,6 +385,7 @@ output: 1 4 9
                         |----------------------------------------------------------------------- |
                         |                          Chained   .then()  => Promise                 |
                         |                          pipes()  => Observable                        |
+                        |            OBSERVABLE SENDS NOTIFICATION OBSERVER RECIEVES THEM        |
                         |------------------------------------------------------------------------|
 ```
 
@@ -391,4 +407,80 @@ apiData.subscribe({
   error(err) { console.log(err)}
 })
 ```
- 
+#### Subscribe
+
+* Observable doesnot maintain list of attached observers
+* Each call starts execution and deliver value or events to the observer
+* 3 types of values observer execution can deliver are
+  1. Next - sends value
+  2. Error - Sends JS Error or exception
+  3. Complete - doesnot send a value
+* In an observable execution, 0 to inifinate next notifications may be delivered.
+* If either error or complete notification is delivered, then nothing else can be delivered afterwards
+* Best practise is to use try {} catch(e) {}
+
+```
+const observable = new Observable(
+ function subscribe ( subscriber => {
+  subscriber.next(1);
+  subscriber.next(2);
+  subscriber.complete();
+  subscriber.next(3); // not delivered since it violates the contract
+ })
+)
+```
+
+* Observer gets attached to newly created observable execution
+* returns an object subscription (ongoing execution)
+* subscription.unsubscribe() - cancel ongoing execution
+
+#### Higher Order Observalbe 
+
+* Observable of observable
+* ConcatAll() - Subscribe to each inner observable that comes out of outer observable
+* ConcatAll() - copies all emitted value unti the observable complete - then move to next one - all values are in that way concatenated
+* MergeAll() - subscribe to each inner observable as it arives, then emits each value as it arrives
+* SwitchAll() - subscribe to first inner observable then emit each value, but when new inner observable unsubscribe to previous and subscribe to that new inner observable
+* exhaust() - subscribe to first inner observable emit each value discarding all new inner observable untill first completes then waits for next inner observable
+
+|  Hot Observable                                      |  Cold Observable                    |
+| -----------------------------------------------------| ------------------------------------|
+| always broadcast                                     | starts when needed                  |
+| doesnt bother if something receives                  | dont start unless subscribed, push value to stream when subscribed |
+
+* To push Data to observable call Next().
+
+##### Adv
+
+* Safety - like observable contract
+* Composability with Operators
+
+#### Subject
+
+* Special type of observable
+* shares single execution path among observers
+* subject delivered to many observers at once
+* multicasting
+
+```
+--------------------------------------------------------------------------------------------------------------------------------------
+|                                              TV - Observer                                                                          |
+|                                          TV Station - Subject                                                                       |
+|-------------------------------------------------------------------------------------------------------------------------------------|
+```
+
+```
+import { subject } from 'rxjs/Subject';
+const subject = new Subject<string>();
+subject.subscribe(value => {})
+
+import { observable } from 'rxjs/observables';
+function fn() : observable <number> {
+  const subject = new Subject<number> ();
+  return subject.asObservable();
+```
+
+* <strong> Subject </strong> - No initial value or replay behaviour
+* <strong> Async Subject </strong> - Emits latest value to observer upon completion
+* <strong> Behaviour Subject </strong> - Req inital value and emits the current value to new subscribers
+* <strong> Replay Subject </strong> - Emits specified number of latest emitted values to new subscriber
