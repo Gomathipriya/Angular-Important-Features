@@ -463,10 +463,10 @@ const observable = new Observable(
 * multicasting
 
 ```
---------------------------------------------------------------------------------------------------------------------------------------
-|                                              TV - Observer                                                                          |
-|                                          TV Station - Subject                                                                       |
-|-------------------------------------------------------------------------------------------------------------------------------------|
+-----------------------------------------------------------------------------------------------------------------------------
+|                                              TV - Observer                                                                |
+|                                          TV Station - Subject                                                             |
+|-------------------------------------------------------------------------------------------------------------------------- |
 ```
 
 ```
@@ -484,3 +484,34 @@ function fn() : observable <number> {
 * <strong> Async Subject </strong> - Emits latest value to observer upon completion
 * <strong> Behaviour Subject </strong> - Req inital value and emits the current value to new subscribers
 * <strong> Replay Subject </strong> - Emits specified number of latest emitted values to new subscriber
+
+### Reactive form/ Model Driven form
+
+```
+import { ReactiveFormModule } from '@angular/form';
+imports : [ ReactiveFormModule ]
+<section>
+  <h1> Form </h1>
+  <form [formGroup] = "form" (ngSubmit) = "onSubmit()">
+    <p> 
+      <label> Name </label>
+      <input type="tet" formControlName = "name" >
+    </p>
+    <p>
+      <button type="submit" [disabled]="!form.valid"> Submit </button>
+    </p>
+  </form>
+</section>
+
+Controller
+=========
+export class ModelDrivenForm {
+  form : formGroup;
+  firstName = new FormControl("", validators.required);
+  constructor(fb: formBuilder) {
+    this.form
+  }
+
+```
+ <strong> FormGroup </strong> Directive applied to whole form, binding it to the controller variable (formControlName)
+
