@@ -271,7 +271,54 @@ output
 | Promise        | May or maynot return single value |
 | Observable     | sync or async return potentially infinite values   |
 
+#### RxJS - Reactive Extension for JavaScript
 
+* creating observable from promise
 
+```
+import { from } from 'rxjs';
+const data = from (fetch('/api/endpoint'));
+data.subscribe({
+ next(response) {
+   console.log(response);
+ }, error (err) {
+   console.log("Error "+ err);
+ }, complete () {
+   console.log("completed"
+ }
+})
+```
 
+* Creating observable form counter
+
+```
+import { interval } from 'rxjs';
+const secondsCounter = interval(1000);
+secondsCounter.subscribe( () => {
+  console.log("completed");
+});
+```
+
+* Creating observable from event
+
+```
+import { fromEvent } from 'rxjs';
+const e1 = document.getElementById('my-id');
+const mouseMove = fromEvent(e1, 'mouseMove');
+const subscription = mouseMoves.subscribe( (event: mouseEvent) => {
+  console.log("completed");
+})
+```
+
+* Creating observable from ajax request
+
+```
+import { ajax } from 'rxjs/ajax';
+const apiData = ajax('/api/data');
+apiData.subscribe( res => {
+  console.log(res)
+});
+```
+
+* Router and form modules are observables - listen for and respond to the user input events
 
