@@ -202,3 +202,31 @@ class DefaultPipe() {
 | 9. Application render                     | 9. Angular bootstrap                                 |
 |                                           | 10. Application render                               |
 
+
+### RXJS
+
+* Library - composing async and event based program using Observable sequence
+
+#### PUSH Vs PULL Protocol
+
+| Protocol    |  Single    | Multiple       | Producer     | Consumer   |
+| ----------- | --------   | -------------- |------------- | ---------  |
+| PULL        | Function   | Iterator       | Passive (produce data when required) | Active (decide when data is required) |
+| PUSH        | Promise    | Observable     | Active (produce data at its own place ) | Passive (reacts to received data ) |
+
+* Protocol - Determines how a data producer can communicate with a data consumer
+
+##### Pull System
+
+* Consumer determines when it receives data from the producer
+* Producer unaware of when data will be delivered to the consumer
+* e.g. JavaScript Function - code which calls the function consumes by puling out single return value
+
+#### Push System
+
+* Producer determines when to send data to the consumer
+* Consumer unaware of when it will receive the data
+* e.g. Promise - 
+
+
+
