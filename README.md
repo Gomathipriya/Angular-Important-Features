@@ -337,4 +337,25 @@ sqNum.subscribe ( x => console.log(x));
 
 output: 1 4 9
 ```
-
+ *  Pipe() - link operators together - combine multiple function into single function - runs composed function in sequence
+ 
+ ```
+ const squareOdd = of(1,2,3,4,5).pipe(
+   filter(n => n%2 != 0),
+   map(n => n * n)
+ ). subscribe(x => console.log(x));
+ ```
+ | Area       | Operations                  |
+ |------------| ----------------------------|
+ | Creation   | from, fromEvent, of         |
+ | Combination| combineLatest, concat, merge, startWith, zip    |
+ | Filtering  | debounceTime, filter, take, takeUntil           |
+ | Transformation | bufferTime, concatMap, map, mergeMap, scan, switchMap |
+ | Utility    | tap                         |
+ | Multicasting| share                      |
+ 
+ |----------------------------------------------------------------------- |
+ |                          Chained   .then()  => Promise                 |
+ |                          pipes()  => Observable                        |
+ |------------------------------------------------------------------------|
+ 
