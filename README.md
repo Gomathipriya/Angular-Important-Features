@@ -64,7 +64,8 @@ export const pipeList = [];
 * Available for any component
 * <strong> Injector </strong> - application wide injector during bootstrap to create dependency, maintian container of dependency instances that is reusable if possible
 * <strong> Provider </strong> - object that tells injector to obtain or create dependancy
-``` @Injectable({
+``` 
+@Injectable({
   provideIn : 'root'
 })  Above is the single shared instance - inject into any class that request
 ```
