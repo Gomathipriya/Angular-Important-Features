@@ -323,3 +323,18 @@ apiData.subscribe( res => {
 
 * Router and form modules are observables - listen for and respond to the user input events
 
+#### Operators
+
+* functions that enable manipulation of collection
+* takes config options - return fn that take source observable - on exec - operator observer (source observable emitted value) - transform them - return new observable of transformed value
+
+```
+import { map } from 'rxjs/operators';
+const nums = of(1,2,3);
+const sqVal = map ((val:number) => val * val);
+const sqNum = sqVal(nums);
+sqNum.subscribe ( x => console.log(x));
+
+output: 1 4 9
+```
+
