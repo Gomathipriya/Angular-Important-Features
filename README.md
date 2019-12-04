@@ -95,6 +95,7 @@ export const pipeList = [];
 * <strong>Automatic</strong>ally takes care of <strong>unsubscribing</strong> from the observalbes
 ``` <p> {{ observalbe | async }} </p> ```
 * async keyword resolve observable to the current value
+* When new value emitted, pipe marks component to be checked for changes
 * Default Without Async - subscribe and map data into a local variable manually -> unsubscribing manually (ngOnDestory) -> to avoid memory leak when the component is destroyed
 * <strong> TakeUntil </strong> operator - Supports multiple observable per subscription - Takes care of unsubscribing - Doesnt work with (onPush) change detection( due to performance optimization)
 ```
@@ -207,6 +208,17 @@ class DefaultPipe() {
 ### RXJS
 
 * Library - composing async and event based program using Observable sequence
+
+#### Reactive Programming
+
+* async data streams (sequence of ordered events) e.g. button click
+* declarative programing paradigm - react to changes via streams
+* handling events and data flows
+
+|-------------- | ------------- |
+| Node JS       | Streams       |
+| Unix          | Pipes         |
+| Angular       | async pipes   |
 
 #### PUSH Vs PULL Protocol
 
